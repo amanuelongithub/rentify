@@ -304,32 +304,24 @@ class DetailsPage extends StatelessWidget {
                                 children: [
                                   Row(
                                     children: [
-                                      // Icon(Icons.location_on, size: 18),
-                                      // SizedBox(width: 8),
                                       Text("Address: "),
                                       Expanded(child: Text(location!)),
                                     ],
                                   ),
                                   Row(
                                     children: [
-                                      // // Icon(Icons.location_city, size: 18),
-                                      // // SizedBox(width: 8),
                                       Text("City: "),
                                       Expanded(child: Text("$city")),
                                     ],
                                   ),
                                   Row(
                                     children: [
-                                      // // Icon(Icons.map, size: 18),
-                                      // // SizedBox(width: 8),
                                       Text("Area: "),
                                       Expanded(child: Text("$area")),
                                     ],
                                   ),
                                   Row(
                                     children: [
-                                      // // Icon(Icons.public, size: 18),
-                                      // // SizedBox(width: 8),
                                       Text("Country: "),
                                       Expanded(child: Text("$country")),
                                     ],
