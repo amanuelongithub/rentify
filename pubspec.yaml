@@ -1,0 +1,48 @@
+name: yegnabet
+description: "A new Flutter project."
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.0-290.4.beta
+
+dependencies:
+  flutter:
+    sdk: flutter
+  get: ^4.7.3
+  flutter_screenutil: ^5.9.3
+  intl: ^0.20.2
+  http: ^1.6.0
+  cached_network_image: ^3.4.1
+  flutter_cache_manager: ^3.4.1
+  connectivity_plus: ^7.0.0
+  flutter_animate: ^4.5.2
+  liquid_glass_renderer: ^0.2.0-dev.4
+
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/videos/
+    - assets/files/
+    - assets/fonts/
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter/Inter_18pt-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Inter/Inter_18pt-Medium.ttf
+          weight: 400
+        - asset: assets/fonts/Inter/Inter_18pt-Regular.ttf
+          weight: 500
+        - asset: assets/fonts/Inter/Inter_18pt-SemiBold.ttf
+          weight: 700

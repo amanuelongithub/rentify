@@ -1,0 +1,622 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "title": "Bole Atlas Luxury Apartment",
+      "bed_room": 3,
+      "bath_room": 3,
+      "garages": "1",
+      "type": "Apartment",
+      "cover_image": "https://i.pinimg.com/736x/03/49/39/0349390c0706ee972457aa095b07ad9c.jpg",
+      "images": [
+        "https://i.pinimg.com/1200x/1b/1c/dc/1b1cdcbbeeada1a4238f12fa6cd752f9.jpg",
+        "https://i.pinimg.com/1200x/1f/48/c6/1f48c69b7f52ca9c3b737581e3edf88b.jpg",
+        "https://i.pinimg.com/1200x/5b/f5/11/5bf511b35118b9893ca18bef8cc9ce56.jpg"
+      ],
+      "video_url": "https://pin.it/1RvPGoAYp",
+      "square_meter": 165,
+      "location": {
+        "id": 17,
+        "coordinates": { "lon": 38.78923, "lat": 8.99374 },
+        "name": "Bole Atlas, Addis Ababa, Ethiopia",
+        "city": "Addis Ababa",
+        "country": "Ethiopia",
+        "area": "Bole Atlas",
+        "zip-code": 1000
+      },
+      "for_rent": true,
+      "prices": { "price": "95000", "currency": "ETB" },
+      "is_available": true,
+      "is_Liked": false,
+      "like_count": 50,
+      "is_furnished": true,
+      "condition": "Newly build",
+      "features": [
+        "Swimming Pool",
+        "24/7 Security",
+        "Gym",
+        "Elevator",
+        "Balcony",
+        "Parking"
+      ],
+      "posted_by": {
+        "id": 1,
+        "image": "https://i.pinimg.com/736x/3b/8e/fe/3b8efeaf3eb74fe273b95e8892ae72e0.jpg",
+        "name": "Rediet Real Estate",
+        "phone": "+251911223344",
+        "email": "red@gmail.com",
+        "rate": 4.5,
+        "review": [
+          {
+            "id": 1,
+            "name": "solomon hailu",
+            "comment": "Great apartment with amazing amenities",
+            "posted_date": "2024-03-15",
+            "rate": 4
+          },
+          {
+            "id": 2,
+            "name": "Addis almayhu",
+            "comment": "Good location and well maintained",
+            "posted_date": "2024-03-10",
+            "rate": 4
+          },
+          {
+            "id": 3,
+            "name": "Johanes Milik",
+            "comment": "Modern facilities but a bit pricey",
+            "posted_date": "2024-03-05",
+            "rate": 4
+          }
+        ]
+      },
+      "posted_at": "2024"
+    },
+    {
+      "id": 2,
+      "title": "Yeka Modern Villa",
+      "bed_room": 4,
+      "bath_room": 3,
+      "garages": "2",
+      "type": "Villa",
+      "cover_image": "https://i.pinimg.com/736x/b8/05/ef/b805efa90d62b259ed3d60e79a42fcb2.jpg",
+      "images": [
+        "https://i.pinimg.com/1200x/1b/1c/dc/1b1cdcbbeeada1a4238f12fa6cd752f9.jpg",
+        "https://i.pinimg.com/1200x/1f/48/c6/1f48c69b7f52ca9c3b737581e3edf88b.jpg",
+        "https://i.pinimg.com/1200x/5b/f5/11/5bf511b35118b9893ca18bef8cc9ce56.jpg"
+      ],
+      "video_url": "https://pin.it/1RvPGoAYp",
+      "square_meter": 400,
+      "location": {
+        "id": 18,
+        "coordinates": { "lon": 38.775, "lat": 9.035 },
+        "name": "Yeka Subcity, Addis Ababa, Ethiopia",
+        "city": "Addis Ababa",
+        "country": "Ethiopia",
+        "area": "Yeka",
+        "zip-code": 1000
+      },
+      "for_rent": false,
+      "prices": { "price": "250000", "currency": "ETB" },
+      "is_available": true,
+      "is_Liked": false,
+      "like_count": 12,
+      "is_furnished": false,
+      "condition": "Failrly used",
+      "features": [
+        "Garden",
+        "Swimming Pool",
+        "Backup Generator",
+        "Security System",
+        "Maid's Room",
+        "Guest House"
+      ],
+      "posted_by": {
+        "id": 2,
+        "image": "https://example.com/default-agent.jpg",
+        "name": "Abebe Real Estate",
+        "phone": "+251911334455",
+        "email": "abebe.realestate@example.com",
+        "rate": null,
+        "review": []
+      },
+      "posted_at": "2024"
+    },
+    {
+      "id": 3,
+      "title": "Summit G+2 Family Villa",
+      "bed_room": 5,
+      "bath_room": 4,
+      "garages": "2",
+      "type": "Villa",
+      "cover_image": "https://i.pinimg.com/1200x/ac/75/b2/ac75b2b1b0feadfd245998a17766dc6b.jpg",
+      "images": [
+        "https://i.pinimg.com/1200x/1b/1c/dc/1b1cdcbbeeada1a4238f12fa6cd752f9.jpg",
+        "https://i.pinimg.com/1200x/1f/48/c6/1f48c69b7f52ca9c3b737581e3edf88b.jpg",
+        "https://i.pinimg.com/1200x/5b/f5/11/5bf511b35118b9893ca18bef8cc9ce56.jpg"
+      ],
+      "video_url": "https://pin.it/1RvPGoAYp",
+      "square_meter": 360,
+      "location": {
+        "id": 19,
+        "coordinates": { "lon": 38.8213, "lat": 9.0011 },
+        "name": "Summit Area, Addis Ababa, Ethiopia",
+        "city": "Addis Ababa",
+        "country": "Ethiopia",
+        "area": "Summit",
+        "zip-code": 1000
+      },
+      "for_rent": false,
+      "prices": { "price": "18000000", "currency": "ETB" },
+      "is_available": true,
+      "is_Liked": false,
+      "like_count": 8,
+      "is_furnished": true,
+      "condition": "Failrly used",
+      "features": [
+        "Solar Panels",
+        "Water Tank",
+        "Water Pump",
+        "Fenced Compound",
+        "Playground",
+        "Barbecue Area"
+      ],
+      "posted_by": {
+        "id": 3,
+        "image": "https://example.com/default-agent.jpg",
+        "name": "KM Homes",
+        "phone": "+251912445566",
+        "email": "km.homes@example.com",
+        "rate": 4.2,
+        "review": [
+          {
+            "id": 4,
+            "name": "Marta Solomon",
+            "comment": "Beautiful villa, perfect for large family",
+            "posted_date": "2024-02-28",
+            "rate": 5
+          },
+          {
+            "id": 5,
+            "name": "Alex Tekle",
+            "comment": "Good value for money",
+            "posted_date": "2024-02-20",
+            "rate": 4
+          }
+        ]
+      },
+      "posted_at": "2024"
+    },
+    {
+      "id": 4,
+      "title": "CMC Sunshine Apartment",
+      "bed_room": 2,
+      "bath_room": 2,
+      "garages": "1",
+      "type": "Apartment",
+      "cover_image": "https://i.pinimg.com/736x/22/c5/e5/22c5e561c6523516a4c1c1219cce6dc5.jpg",
+      "images": [
+        "https://i.pinimg.com/1200x/1b/1c/dc/1b1cdcbbeeada1a4238f12fa6cd752f9.jpg",
+        "https://i.pinimg.com/1200x/1f/48/c6/1f48c69b7f52ca9c3b737581e3edf88b.jpg",
+        "https://i.pinimg.com/1200x/5b/f5/11/5bf511b35118b9893ca18bef8cc9ce56.jpg"
+      ],
+      "video_url": "https://pin.it/1RvPGoAYp",
+      "square_meter": 120,
+      "location": {
+        "id": 20,
+        "coordinates": { "lon": 38.82944, "lat": 9.04012 },
+        "name": "CMC, Addis Ababa, Ethiopia",
+        "city": "Addis Ababa",
+        "country": "Ethiopia",
+        "area": "CMC",
+        "zip-code": 1000
+      },
+      "for_rent": true,
+      "prices": { "price": "55000", "currency": "ETB" },
+      "is_available": true,
+      "is_Liked": false,
+      "like_count": 25,
+      "is_furnished": true,
+      "condition": "Newly build",
+      "features": [
+        "Balcony",
+        "Parking",
+        "24/7 Security",
+        "Laundry Room",
+        "Storage Space",
+        "High-speed Internet"
+      ],
+      "posted_by": {
+        "id": 4,
+        "image": "https://example.com/default-agent.jpg",
+        "name": "Sunshine Homes",
+        "phone": "+251910224466",
+        "email": "sunshine.homes@example.com",
+        "rate": null,
+        "review": []
+      },
+      "posted_at": "2024"
+    },
+    {
+      "id": 5,
+      "title": "4 Kilo City View Condo",
+      "bed_room": 1,
+      "bath_room": 1,
+      "garages": "0",
+      "type": "Condominium",
+      "cover_image": "https://i.pinimg.com/736x/94/5f/19/945f19f0be8d562539d5120528ad02fd.jpg",
+      "images": [
+        "https://i.pinimg.com/1200x/1b/1c/dc/1b1cdcbbeeada1a4238f12fa6cd752f9.jpg",
+        "https://i.pinimg.com/1200x/1f/48/c6/1f48c69b7f52ca9c3b737581e3edf88b.jpg",
+        "https://i.pinimg.com/1200x/5b/f5/11/5bf511b35118b9893ca18bef8cc9ce56.jpg"
+      ],
+      "video_url": "https://pin.it/1RvPGoAYp",
+      "square_meter": 75,
+      "location": {
+        "id": 21,
+        "coordinates": { "lon": 38.7561, "lat": 9.0403 },
+        "name": "4 Kilo, Addis Ababa, Ethiopia",
+        "city": "Addis Ababa",
+        "country": "Ethiopia",
+        "area": "4 Kilo",
+        "zip-code": 1000
+      },
+      "for_rent": true,
+      "prices": { "price": "28000", "currency": "ETB" },
+      "is_available": true,
+      "is_Liked": false,
+      "like_count": 35,
+      "is_furnished": false,
+      "condition": "Newly build",
+      "features": [
+        "City View",
+        "Shared Garden",
+        "Security",
+        "Close to University",
+        "Public Transport Access"
+      ],
+      "posted_by": {
+        "id": 5,
+        "image": "https://example.com/default-agent.jpg",
+        "name": "Habesha Properties",
+        "phone": "+251900119955",
+        "email": "habesha.properties@example.com",
+        "rate": 3.8,
+        "review": [
+          {
+            "id": 6,
+            "name": "Daniel Mesfin",
+            "comment": "Good for students, basic but affordable",
+            "posted_date": "2024-03-01",
+            "rate": 4
+          },
+          {
+            "id": 7,
+            "name": "Elena Bekele",
+            "comment": "Small but has everything needed",
+            "posted_date": "2024-02-25",
+            "rate": 4
+          },
+          {
+            "id": 8,
+            "name": "Samuel Getachew",
+            "comment": "Could use some renovation",
+            "posted_date": "2024-02-20",
+            "rate": 3
+          }
+        ]
+      },
+      "posted_at": "2024"
+    },
+    {
+      "id": 6,
+      "title": "Ayat G+1 Modern House",
+      "bed_room": 4,
+      "bath_room": 3,
+      "garages": "1",
+      "type": "House",
+      "cover_image": "https://i.pinimg.com/736x/22/54/b3/2254b37e33f2cc591529bf258bb87235.jpg",
+      "images": [
+        "https://i.pinimg.com/1200x/1b/1c/dc/1b1cdcbbeeada1a4238f12fa6cd752f9.jpg",
+        "https://i.pinimg.com/1200x/1f/48/c6/1f48c69b7f52ca9c3b737581e3edf88b.jpg",
+        "https://i.pinimg.com/1200x/5b/f5/11/5bf511b35118b9893ca18bef8cc9ce56.jpg"
+      ],
+      "video_url": "https://pin.it/1RvPGoAYp",
+      "square_meter": 280,
+      "location": {
+        "id": 22,
+        "coordinates": { "lon": 38.8841, "lat": 9.0374 },
+        "name": "Ayat, Addis Ababa, Ethiopia",
+        "city": "Addis Ababa",
+        "country": "Ethiopia",
+        "area": "Ayat",
+        "zip-code": 1000
+      },
+      "for_rent": false,
+      "prices": { "price": "12500000", "currency": "ETB" },
+      "is_available": true,
+      "is_Liked": false,
+      "like_count": 18,
+      "is_furnished": true,
+      "condition": "Failrly used",
+      "features": [
+        "Modern Kitchen",
+        "Walk-in Closet",
+        "Home Office",
+        "Solar Water Heater",
+        "Smart Home System",
+        "Landscaped Garden"
+      ],
+      "posted_by": {
+        "id": 6,
+        "image": "https://example.com/default-agent.jpg",
+        "name": "Nati Real Estate",
+        "phone": "+251912009988",
+        "email": "nati.realestate@example.com",
+        "rate": null,
+        "review": []
+      },
+      "posted_at": "2024"
+    },
+    {
+      "id": 7,
+      "title": "Lebu Luxury Apartment",
+      "bed_room": 3,
+      "bath_room": 2,
+      "garages": "1",
+      "type": "Apartment",
+      "cover_image": "https://i.pinimg.com/736x/f0/2c/61/f02c6103779fb7e6e9582d34d2ae87b4.jpg",
+      "images": [
+        "https://i.pinimg.com/1200x/1b/1c/dc/1b1cdcbbeeada1a4238f12fa6cd752f9.jpg",
+        "https://i.pinimg.com/1200x/1f/48/c6/1f48c69b7f52ca9c3b737581e3edf88b.jpg",
+        "https://i.pinimg.com/1200x/5b/f5/11/5bf511b35118b9893ca18bef8cc9ce56.jpg"
+      ],
+      "video_url": "https://pin.it/1RvPGoAYp",
+      "square_meter": 150,
+      "location": {
+        "id": 23,
+        "coordinates": { "lon": 38.7042, "lat": 8.9443 },
+        "name": "Lebu, Addis Ababa, Ethiopia",
+        "city": "Addis Ababa",
+        "country": "Ethiopia",
+        "area": "Lebu",
+        "zip-code": 1000
+      },
+      "for_rent": true,
+      "prices": { "price": "60000", "currency": "ETB" },
+      "is_available": true,
+      "is_Liked": false,
+      "like_count": 30,
+      "is_furnished": false,
+      "condition": "Newly build",
+      "features": [
+        "Rooftop Terrace",
+        "Concierge Service",
+        "Underground Parking",
+        "Pet Friendly",
+        "Fitness Center",
+        "Community Lounge"
+      ],
+      "posted_by": {
+        "id": 7,
+        "image": "https://example.com/default-agent.jpg",
+        "name": "YegnaBet Agency",
+        "phone": "+251911778899",
+        "email": "yegna.bet@example.com",
+        "rate": 4.7,
+        "review": [
+          {
+            "id": 9,
+            "name": "Liya Tadesse",
+            "comment": "Excellent service and modern apartment",
+            "posted_date": "2024-03-12",
+            "rate": 5
+          },
+          {
+            "id": 10,
+            "name": "Michael Assefa",
+            "comment": "Great amenities and location",
+            "posted_date": "2024-03-05",
+            "rate": 5
+          },
+          {
+            "id": 11,
+            "name": "Sara Mengistu",
+            "comment": "Very satisfied with everything",
+            "posted_date": "2024-02-28",
+            "rate": 4
+          }
+        ]
+      },
+      "posted_at": "2024"
+    },
+    {
+      "id": 8,
+      "title": "Goro Townhouse",
+      "bed_room": 3,
+      "bath_room": 2,
+      "garages": "1",
+      "type": "Townhouse",
+      "cover_image": "https://i.pinimg.com/736x/4d/82/c2/4d82c2af8f9204a9ce41346bf162885a.jpg",
+      "images": [
+        "https://i.pinimg.com/1200x/1b/1c/dc/1b1cdcbbeeada1a4238f12fa6cd752f9.jpg",
+        "https://i.pinimg.com/1200x/1f/48/c6/1f48c69b7f52ca9c3b737581e3edf88b.jpg",
+        "https://i.pinimg.com/1200x/5b/f5/11/5bf511b35118b9893ca18bef8cc9ce56.jpg"
+      ],
+      "video_url": "https://pin.it/1RvPGoAYp",
+      "square_meter": 200,
+      "location": {
+        "id": 24,
+        "coordinates": { "lon": 38.8483, "lat": 8.9871 },
+        "name": "Goro, Addis Ababa, Ethiopia",
+        "city": "Addis Ababa",
+        "country": "Ethiopia",
+        "area": "Goro",
+        "zip-code": 1000
+      },
+      "for_rent": false,
+      "prices": { "price": "9500000", "currency": "ETB" },
+      "is_available": true,
+      "is_Liked": false,
+      "like_count": 15,
+      "is_furnished": true,
+      "condition": "Newly build",
+      "features": [
+        "Private Yard",
+        "Built-in Wardrobes",
+        "Fireplace",
+        "Separate Dining Room",
+        "Utility Room",
+        "Patio"
+      ],
+      "posted_by": {
+        "id": 8,
+        "image": "https://example.com/default-agent.jpg",
+        "name": "Teddy Homes",
+        "phone": "+251913441122",
+        "email": "teddy.homes@example.com",
+        "rate": null,
+        "review": []
+      },
+      "posted_at": "2024"
+    },
+    {
+      "id": 9,
+      "title": "Sarbet Executive Villa",
+      "bed_room": 5,
+      "bath_room": 5,
+      "garages": "2",
+      "type": "Villa",
+      "cover_image": "https://i.pinimg.com/1200x/98/ca/4a/98ca4aa6b154c7a3afa414df8e36903a.jpg",
+      "images": [
+        "https://i.pinimg.com/1200x/1b/1c/dc/1b1cdcbbeeada1a4238f12fa6cd752f9.jpg",
+        "https://i.pinimg.com/1200x/1f/48/c6/1f48c69b7f52ca9c3b737581e3edf88b.jpg",
+        "https://i.pinimg.com/1200x/5b/f5/11/5bf511b35118b9893ca18bef8cc9ce56.jpg"
+      ],
+      "video_url": "https://pin.it/1RvPGoAYp",
+      "square_meter": 500,
+      "location": {
+        "id": 25,
+        "coordinates": { "lon": 38.7401, "lat": 9.0083 },
+        "name": "Sarbet, Addis Ababa, Ethiopia",
+        "city": "Addis Ababa",
+        "country": "Ethiopia",
+        "area": "Sarbet",
+        "zip-code": 1000
+      },
+      "for_rent": false,
+      "prices": { "price": "26000000", "currency": "ETB" },
+      "is_available": true,
+      "is_Liked": false,
+      "like_count": 5,
+      "is_furnished": true,
+      "condition": "Newly build",
+      "features": [
+        "Home Theater",
+        "Wine Cellar",
+        "Sauna",
+        "Jacuzzi",
+        "Tennis Court",
+        "Guest Suite",
+        "Staff Quarters"
+      ],
+      "posted_by": {
+        "id": 9,
+        "image": "https://example.com/default-agent.jpg",
+        "name": "Prime Estates",
+        "phone": "+251911225577",
+        "email": "prime.estates@example.com",
+        "rate": 4.9,
+        "review": [
+          {
+            "id": 12,
+            "name": "Mohammed Ali",
+            "comment": "Absolutely stunning property, worth every penny",
+            "posted_date": "2024-03-18",
+            "rate": 5
+          },
+          {
+            "id": 13,
+            "name": "Sophia Zenebe",
+            "comment": "Luxury at its finest",
+            "posted_date": "2024-03-15",
+            "rate": 5
+          }
+        ]
+      },
+      "posted_at": "2024"
+    },
+    {
+      "id": 10,
+      "title": "Bole Japan High-End Apartment",
+      "bed_room": 3,
+      "bath_room": 2,
+      "garages": "1",
+      "type": "Apartment",
+      "cover_image": "https://i.pinimg.com/1200x/1e/c9/10/1ec9100e3d0fabc8305e1f06b7e20397.jpg",
+      "images": [
+        "https://i.pinimg.com/1200x/1b/1c/dc/1b1cdcbbeeada1a4238f12fa6cd752f9.jpg",
+        "https://i.pinimg.com/1200x/1f/48/c6/1f48c69b7f52ca9c3b737581e3edf88b.jpg",
+        "https://i.pinimg.com/1200x/5b/f5/11/5bf511b35118b9893ca18bef8cc9ce56.jpg"
+      ],
+      "video_url": "https://pin.it/1RvPGoAYp",
+      "square_meter": 180,
+      "location": {
+        "id": 26,
+        "coordinates": { "lon": 38.7799, "lat": 8.9931 },
+        "name": "Bole Japan, Addis Ababa, Ethiopia",
+        "city": "Addis Ababa",
+        "country": "Ethiopia",
+        "area": "Bole Japan",
+        "zip-code": 1000
+      },
+      "for_rent": true,
+      "prices": { "price": "85000", "currency": "ETB" },
+      "is_available": true,
+      "is_Liked": false,
+      "like_count": 42,
+      "is_furnished": true,
+      "condition": "Newly build",
+      "features": [
+        "Panoramic Windows",
+        "Central AC",
+        "Smart Lighting",
+        "Video Intercom",
+        "Bicycle Storage",
+        "Package Room"
+      ],
+      "posted_by": {
+        "id": 10,
+        "image": "https://example.com/default-agent.jpg",
+        "name": "EthioHomes",
+        "phone": "+251911667788",
+        "email": "ethio.homes@example.com",
+        "rate": 4.3,
+        "review": [
+          {
+            "id": 14,
+            "name": "Thomas Girma",
+            "comment": "Great modern apartment in prime location",
+            "posted_date": "2024-03-10",
+            "rate": 4
+          },
+          {
+            "id": 15,
+            "name": "Ruth Abraham",
+            "comment": "Good value for the amenities provided",
+            "posted_date": "2024-03-05",
+            "rate": 4
+          },
+          {
+            "id": 16,
+            "name": "David Yohannes",
+            "comment": "Well managed building",
+            "posted_date": "2024-02-28",
+            "rate": 5
+          }
+        ]
+      },
+      "posted_at": "2024"
+    }
+  ]
+}
