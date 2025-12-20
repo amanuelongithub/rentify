@@ -75,29 +75,7 @@ class _BackgroundCaptureWidgetState extends State<BackgroundCaptureWidget> with 
       child: ClipRRect(borderRadius: BorderRadius.circular(6), child: _buildWidgetContent()),
     );
 
-    return Positioned(
-      left: position.dx,
-      top: position.dy,
-      child: Draggable(
-        feedback: SizedBox.square(),
-        childWhenDragging: child,
-        onDragUpdate: (details) {
-          setState(() {
-            position = position + details.delta;
-          });
-
-          if (!isCapturing) {
-            _captureBackground();
-          }
-        },
-        onDragEnd: (details) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            _captureBackground();
-          });
-        },
-        child: child,
-      ),
-    );
+    return child;
   }
 
   Widget _buildWidgetContent() {

@@ -121,7 +121,7 @@ class _SavedPageState extends State<SavedPage> with SingleTickerProviderStateMix
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Padding(
-        padding: const EdgeInsets.only(left: hPadding, right: hPadding, bottom: hPadding * 3),
+        padding: const EdgeInsets.only(left: hPadding, right: hPadding, bottom: hPadding * 2),
         child: GetBuilder<HomeController>(
           builder: (ctr) {
             if (ctr.isLoading) {
