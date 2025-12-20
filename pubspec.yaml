@@ -35,6 +35,10 @@ flutter:
     - assets/videos/
     - assets/files/
     - assets/fonts/
+
+  shaders:
+    - shaders/liquid_glass_lens.frag
+
   fonts:
     - family: Inter
       fonts:

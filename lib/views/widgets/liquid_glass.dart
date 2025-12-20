@@ -1,113 +1,168 @@
-import 'dart:math';
-import 'dart:ui';
+import 'dart:async';
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:yegnabet/service/liquid_effct/base_shader.dart';
+import 'package:yegnabet/service/liquid_effct/shader_painter.dart';
 
-class LiquidGlassContainer extends StatefulWidget {
-  final double width;
-  final double height;
-  final Widget? child;
-
-  const LiquidGlassContainer({
+class BackgroundCaptureWidget extends StatefulWidget {
+  const BackgroundCaptureWidget({
     super.key,
+    required this.child,
     required this.width,
     required this.height,
-    this.child,
+    required this.shader,
+    this.initialPosition,
+    this.captureInterval = const Duration(milliseconds: 8),
+    this.backgroundKey,
   });
 
+  final Widget child;
+  final double width;
+  final double height;
+
+  final Offset? initialPosition;
+  final Duration? captureInterval;
+  final GlobalKey? backgroundKey;
+
+  final BaseShader shader;
+
   @override
-  _LiquidGlassContainerState createState() => _LiquidGlassContainerState();
+  State<BackgroundCaptureWidget> createState() => _BackgroundCaptureWidgetState();
 }
 
-class _LiquidGlassContainerState extends State<LiquidGlassContainer>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
+class _BackgroundCaptureWidgetState extends State<BackgroundCaptureWidget> with TickerProviderStateMixin {
+  late Offset position;
+  Timer? timer;
+  bool isCapturing = false;
+  ui.Image? capturedBackground;
 
   @override
   void initState() {
     super.initState();
-    _controller =
-        AnimationController(vsync: this, duration: Duration(seconds: 2))
-          ..repeat();
+    position = widget.initialPosition ?? const Offset(100, 100);
+
+    _startContinuousCapture();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _captureBackground();
+    });
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    timer?.cancel();
+    capturedBackground?.dispose();
     super.dispose();
+  }
+
+  void _startContinuousCapture() {
+    if (widget.captureInterval != null) {
+      timer = Timer.periodic(widget.captureInterval!, (timer) {
+        if (mounted && !isCapturing) {
+          _captureBackground();
+        }
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (_, __) {
-        return CustomPaint(
-          painter: _LiquidBorderPainter(progress: _controller.value),
-          child: Container(
-            width: widget.width,
-            height: widget.height,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                child: Container(
-                  color: Colors.white.withOpacity(0.2),
-                  child: widget.child,
-                ),
-              ),
-            ),
-          ),
-        );
-      },
+    final Widget child = SizedBox(
+      width: widget.width,
+      height: widget.height,
+      child: ClipRRect(borderRadius: BorderRadius.circular(6), child: _buildWidgetContent()),
+    );
+
+    return Positioned(
+      left: position.dx,
+      top: position.dy,
+      child: Draggable(
+        feedback: SizedBox.square(),
+        childWhenDragging: child,
+        onDragUpdate: (details) {
+          setState(() {
+            position = position + details.delta;
+          });
+
+          if (!isCapturing) {
+            _captureBackground();
+          }
+        },
+        onDragEnd: (details) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            _captureBackground();
+          });
+        },
+        child: child,
+      ),
     );
   }
-}
 
-class _LiquidBorderPainter extends CustomPainter {
-  final double progress;
-
-  _LiquidBorderPainter({required this.progress});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = Colors.white.withOpacity(0.5)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 3;
-
-    final path = Path();
-    final waveHeight = 10.0;
-    final waveLength = 40.0;
-
-    // Top edge
-    path.moveTo(0, 0);
-    for (double x = 0; x <= size.width; x++) {
-      double y = waveHeight * sin((2 * pi / waveLength) * x + progress * 2 * pi);
-      path.lineTo(x, y);
+  Widget _buildWidgetContent() {
+    if (widget.shader.isLoaded && capturedBackground != null) {
+      widget.shader.updateShaderUniforms(width: widget.width, height: widget.height, backgroundImage: capturedBackground);
+      return CustomPaint(size: Size(widget.width, widget.height), painter: ShaderPainter(widget.shader.shader), child: widget.child);
     }
 
-    // Right edge
-    for (double y = 0; y <= size.height; y++) {
-      double x = size.width + waveHeight * sin((2 * pi / waveLength) * y + progress * 2 * pi);
-      path.lineTo(x, y);
-    }
-
-    // Bottom edge
-    for (double x = size.width; x >= 0; x--) {
-      double y = size.height + waveHeight * sin((2 * pi / waveLength) * x + progress * 2 * pi);
-      path.lineTo(x, y);
-    }
-
-    // Left edge
-    for (double y = size.height; y >= 0; y--) {
-      double x = waveHeight * sin((2 * pi / waveLength) * y + progress * 2 * pi);
-      path.lineTo(x, y);
-    }
-
-    path.close();
-    canvas.drawPath(path, paint);
+    // Fallback to normal child
+    return widget.child;
   }
 
-  @override
-  bool shouldRepaint(covariant _LiquidBorderPainter oldDelegate) => true;
+  Future<void> _captureBackground() async {
+    if (isCapturing || !mounted) return;
+
+    isCapturing = true;
+
+    try {
+      // 1. Get the RenderRepaintBoundary
+      final boundary = widget.backgroundKey?.currentContext?.findRenderObject() as RenderRepaintBoundary?;
+
+      final ourBox = context.findRenderObject() as RenderBox?;
+
+      if (boundary == null || !boundary.attached || ourBox == null || !ourBox.hasSize) {
+        return;
+      }
+
+      // 2. Calculate the capture region
+      final boundaryBox = boundary as RenderBox;
+      if (!boundaryBox.hasSize || widget.width <= 0 || widget.height <= 0) {
+        return;
+      }
+
+      final widgetRectInBoundary = Rect.fromPoints(
+        boundaryBox.globalToLocal(ourBox.localToGlobal(Offset.zero)),
+        boundaryBox.globalToLocal(ourBox.localToGlobal(ourBox.size.bottomRight(Offset.zero))),
+      );
+
+      final boundaryRect = Rect.fromLTWH(0, 0, boundaryBox.size.width, boundaryBox.size.height);
+      final Rect regionToCapture = widgetRectInBoundary.intersect(boundaryRect);
+
+      if (regionToCapture.isEmpty) {
+        return;
+      }
+
+      // 3. Capture the image
+      final double pixelRatio = MediaQuery.of(context).devicePixelRatio;
+      final OffsetLayer offsetLayer = boundary.debugLayer! as OffsetLayer;
+      final ui.Image croppedImage = await offsetLayer.toImage(regionToCapture, pixelRatio: pixelRatio);
+
+      // 5. Update state
+      if (mounted) {
+        setState(() {
+          capturedBackground?.dispose();
+          capturedBackground = croppedImage;
+        });
+      } else {
+        croppedImage.dispose();
+      }
+    } catch (e) {
+      debugPrint('Error capturing background: $e');
+    } finally {
+      if (mounted) {
+        isCapturing = false;
+      }
+    }
+  }
 }
