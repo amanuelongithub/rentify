@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:yegnabet/utils/theme_data.dart';
+import 'package:rentify/utils/theme_data.dart';
 
 InputDecoration decorationText(String? hintTxt) {
   return InputDecoration(

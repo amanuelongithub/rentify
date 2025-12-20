@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
-import 'package:yegnabet/utils/globals.dart';
+import 'package:rentify/utils/globals.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:yegnabet/utils/image_constants.dart';
-import 'package:yegnabet/views/filter_page.dart';
+import 'package:rentify/utils/image_constants.dart';
+import 'package:rentify/views/filter_page.dart';
 
 class MainAppbar extends StatelessWidget {
   const MainAppbar({super.key});
@@ -46,7 +46,7 @@ class MainAppbar extends StatelessWidget {
             ],
           ),
           GestureDetector(
-            onTap: (){
+            onTap: () {
               Get.toNamed(FilterPage.route);
             },
             child: Container(

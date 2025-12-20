@@ -1,10 +1,10 @@
-import 'package:yegnabet/controller/home_controller.dart';
-import 'package:yegnabet/model/home_madel.dart';
-import 'package:yegnabet/utils/globals.dart';
+import 'package:rentify/controller/home_controller.dart';
+import 'package:rentify/model/home_madel.dart';
+import 'package:rentify/utils/globals.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yegnabet/views/details_page.dart';
+import 'package:rentify/views/details_page.dart';
 
 class SavedPage extends StatefulWidget {
   const SavedPage({super.key});

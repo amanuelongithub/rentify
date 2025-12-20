@@ -1,5 +1,5 @@
 import 'dart:developer';
-import 'package:yegnabet/model/home_madel.dart';
+import 'package:rentify/model/home_madel.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 

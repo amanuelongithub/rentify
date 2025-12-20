@@ -1,12 +1,12 @@
 import 'dart:math';
-import 'package:yegnabet/utils/globals.dart';
-import 'package:yegnabet/utils/image_constants.dart';
-import 'package:yegnabet/views/foryou_page.dart';
-import 'package:yegnabet/views/widgets/main_appbar.dart';
-import 'package:yegnabet/views/saved_page.dart';
+import 'package:rentify/utils/globals.dart';
+import 'package:rentify/utils/image_constants.dart';
+import 'package:rentify/views/foryou_page.dart';
+import 'package:rentify/views/widgets/main_appbar.dart';
+import 'package:rentify/views/saved_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:yegnabet/views/widgets/dot_indicator.dart';
+import 'package:rentify/views/widgets/dot_indicator.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
