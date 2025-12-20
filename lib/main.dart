@@ -30,7 +30,10 @@ class MyApp extends StatelessWidget {
       useInheritedMediaQuery: true,
       minTextAdapt: true,
       splitScreenMode: true,
-      child: GetMaterialApp(debugShowCheckedModeBanner: false, theme: AppTheme.theme, getPages: Routes.routes, initialRoute: '/'),
+      child: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: const SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarIconBrightness: Brightness.light),
+        child: GetMaterialApp(debugShowCheckedModeBanner: false, theme: AppTheme.theme, getPages: Routes.routes, initialRoute: '/'),
+      ),
     );
   }
 }
