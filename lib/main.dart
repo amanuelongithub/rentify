@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
-import 'package:yegnabet/controller/home_controller.dart';
-import 'package:yegnabet/routes/routes.dart';
-import 'package:yegnabet/utils/theme_data.dart';
+import 'package:rentify/controller/home_controller.dart';
+import 'package:rentify/routes/routes.dart';
+import 'package:rentify/utils/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -30,7 +30,10 @@ class MyApp extends StatelessWidget {
       useInheritedMediaQuery: true,
       minTextAdapt: true,
       splitScreenMode: true,
-      child: GetMaterialApp(debugShowCheckedModeBanner: false, theme: AppTheme.theme, getPages: Routes.routes, initialRoute: '/'),
+      child: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: const SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarIconBrightness: Brightness.light),
+        child: GetMaterialApp(debugShowCheckedModeBanner: false, theme: AppTheme.theme, getPages: Routes.routes, initialRoute: '/'),
+      ),
     );
   }
 }

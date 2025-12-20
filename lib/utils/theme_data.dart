@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:yegnabet/utils/globals.dart';
+import 'package:rentify/utils/globals.dart';
 
 class AppTheme {
   // Brand Colors

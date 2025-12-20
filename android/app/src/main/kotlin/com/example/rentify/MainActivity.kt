@@ -1,4 +1,4 @@
-package com.example.yegnabet 
+package com.example.rentify 
 
 import android.content.Context
 import android.os.Build

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yegnabet/controller/home_controller.dart';
-import 'package:yegnabet/utils/globals.dart';
-import 'package:yegnabet/utils/theme_data.dart';
-import 'package:yegnabet/views/widgets/text_decoration.dart';
+import 'package:rentify/controller/home_controller.dart';
+import 'package:rentify/utils/globals.dart';
+import 'package:rentify/utils/theme_data.dart';
+import 'package:rentify/views/widgets/text_decoration.dart';
 
 class ForYouPage extends StatefulWidget {
   const ForYouPage({super.key});
