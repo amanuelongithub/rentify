@@ -3,8 +3,8 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:yegnabet/service/liquid_effct/base_shader.dart';
-import 'package:yegnabet/service/liquid_effct/shader_painter.dart';
+import 'package:rentify/service/liquid_effct/base_shader.dart';
+import 'package:rentify/service/liquid_effct/shader_painter.dart';
 
 class BackgroundCaptureWidget extends StatefulWidget {
   const BackgroundCaptureWidget({
