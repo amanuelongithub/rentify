@@ -1,10 +1,16 @@
+import 'dart:developer';
+
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:rentify/controller/home_controller.dart';
 import 'package:rentify/model/home_madel.dart';
+import 'package:rentify/service/liquid_glass_lens_shader.dart';
 import 'package:rentify/utils/globals.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rentify/utils/image_constants.dart';
 import 'package:rentify/views/details_page.dart';
+import 'package:rentify/views/widgets/liquid_glass.dart';
 
 class SavedPage extends StatefulWidget {
   const SavedPage({super.key});
@@ -12,8 +18,13 @@ class SavedPage extends StatefulWidget {
   State<SavedPage> createState() => _SavedPageState();
 }
 
-class _SavedPageState extends State<SavedPage> with SingleTickerProviderStateMixin {
+class _SavedPageState extends State<SavedPage> with TickerProviderStateMixin {
+  final GlobalKey backgroundKey = GlobalKey();
+  late LiquidGlassLensShader liquidGlassLensShader = LiquidGlassLensShader.circle()..initialize();
+
   late final AnimationController _controller;
+  late final AnimationController _fadeController;
+
   late Animation<double> _scaleAnimation;
   late Animation<double> _positionAnimation;
 
@@ -22,6 +33,8 @@ class _SavedPageState extends State<SavedPage> with SingleTickerProviderStateMix
   late Animation<double> _scaleDownAnimation;
   late Animation<double> _bgFadeAnimation;
   late Animation<double> _imgZoomAnimation;
+  late Animation<double> _bookMarkAnimation;
+  late Animation<double> _bookMarkFadeAnimation;
 
   int _index = 0;
   double _dx = 0;
@@ -33,6 +46,7 @@ class _SavedPageState extends State<SavedPage> with SingleTickerProviderStateMix
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 600), lowerBound: 0, upperBound: 1);
+    _fadeController = AnimationController(vsync: this, duration: 1.ms, lowerBound: 0, upperBound: 1);
 
     _scaleAnimation = Tween<double>(begin: 0.9, end: 1).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
     _positionAnimation = Tween<double>(begin: 40, end: 0).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
@@ -45,6 +59,8 @@ class _SavedPageState extends State<SavedPage> with SingleTickerProviderStateMix
       end: Colors.black,
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
     _imgZoomAnimation = Tween<double>(begin: 1, end: 1.09).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
+    _bookMarkAnimation = Tween<double>(begin: -5, end: -40).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
+    _bookMarkFadeAnimation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(parent: _fadeController, curve: Curves.easeIn));
   }
 
   @override
@@ -79,6 +95,7 @@ class _SavedPageState extends State<SavedPage> with SingleTickerProviderStateMix
 
     if (shouldSwipe) {
       _swiping = true;
+      _fadeController.forward(from: 0);
       _controller
           .animateTo(1, duration: const Duration(milliseconds: 400), curve: Curves.easeOut)
           .whenComplete(() => leftDrag ? _previousCard() : _nextCard());
@@ -121,7 +138,7 @@ class _SavedPageState extends State<SavedPage> with SingleTickerProviderStateMix
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Padding(
-        padding: const EdgeInsets.only(left: hPadding, right: hPadding, bottom: hPadding * 2),
+        padding: const EdgeInsets.only(left: hPadding, right: hPadding, bottom: hPadding * 5),
         child: GetBuilder<HomeController>(
           builder: (ctr) {
             if (ctr.isLoading) {
@@ -224,9 +241,14 @@ class _SavedPageState extends State<SavedPage> with SingleTickerProviderStateMix
                         final direction = _dx.isNegative ? -1 : 1;
                         final exit = _controller.value * screen * direction;
 
+                        log('opacity value ${_bookMarkFadeAnimation.value}');
+
                         return Transform.translate(
                           offset: Offset(_dx + exit, _dy),
-                          child: Transform.rotate(angle: _rotation, child: _card(ctr.homeModel!.data![_index])),
+                          child: Transform.rotate(
+                            angle: _rotation,
+                            child: _card(ctr.homeModel!.data![_index], _bookMarkAnimation.value, _bookMarkFadeAnimation.value),
+                          ),
                         );
                       },
                     ),
@@ -240,7 +262,8 @@ class _SavedPageState extends State<SavedPage> with SingleTickerProviderStateMix
     );
   }
 
-  Widget _card(Datum data) {
+  Widget _card(Datum data, double bookmarkOffset, double bookmarkOpacity) {
+    log(bookmarkOpacity.toString());
     return GestureDetector(
       onTap: () {
         Get.find<HomeController>().fetchDetail(data);
@@ -248,93 +271,142 @@ class _SavedPageState extends State<SavedPage> with SingleTickerProviderStateMix
       },
       child: Stack(
         children: [
-          Hero(
-            tag: '${data.id} img',
-            child: SizedBox(
-              width: double.infinity,
-              height: double.infinity,
-              child: Container(
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(24)),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(24),
-                  child: Transform.scale(
-                    scale: 1.09,
-                    child: data.coverImage != null ? CachedNetworkImage(imageUrl: data.coverImage!, fit: BoxFit.cover) : Container(),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Positioned.fill(
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(24),
-                gradient: LinearGradient(
-                  colors: [Colors.black.withValues(alpha: 0.3), Colors.black],
-                  begin: Alignment.center,
-                  end: Alignment.bottomCenter,
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    data.title ?? data.location!.name!,
-                    style: const TextStyle(color: Colors.white, fontSize: xxlfont * 1.4, fontWeight: FontWeight.bold, letterSpacing: 0),
-                  ),
-                  Column(
-                    children: [
-                      Row(
-                        spacing: 5,
-                        children: [
-                          Icon(Icons.space_bar_outlined),
-                          Text(
-                            '${data.squareMeter!} sq',
-                            style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, fontSize: mfont),
-                          ),
-                        ],
+          RepaintBoundary(
+            key: backgroundKey,
+            child: Stack(
+              children: [
+                Hero(
+                  tag: '${data.id} img',
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: double.infinity,
+                    child: Container(
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(24)),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(24),
+                        child: Transform.scale(
+                          scale: 1.09,
+                          child: data.coverImage != null ? CachedNetworkImage(imageUrl: data.coverImage!, fit: BoxFit.cover) : Container(),
+                        ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            spacing: 5,
-                            children: [
-                              Icon(Icons.location_on_outlined),
-                              Text(
-                                data.location!.city!,
-                                style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, fontSize: mfont),
-                              ),
-                            ],
+                    ),
+                  ),
+                ),
+                Positioned.fill(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(24),
+                      gradient: LinearGradient(
+                        colors: [Colors.black.withValues(alpha: 0.3), Colors.black],
+                        begin: Alignment.center,
+                        end: Alignment.bottomCenter,
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AnimatedOpacity(
+                          opacity: bookmarkOpacity,
+                          duration: Duration(seconds: 2),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                            decoration: BoxDecoration(color: getTheme(context).primary, borderRadius: BorderRadius.circular(6)),
+                            child: Text(
+                              data.type!,
+                              style: const TextStyle(color: Colors.white, fontSize: sfont, fontWeight: FontWeight.bold, letterSpacing: 0),
+                            ),
                           ),
-                          RichText(
-                            text: TextSpan(
+                        ),
+                        Text(
+                          data.title ?? data.location!.name!,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: xxlfont * 1.4,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 0,
+                          ),
+                        ),
+                        Column(
+                          children: [
+                            Row(
+                              spacing: 5,
                               children: [
-                                TextSpan(
-                                  text: formatNumberWithCommas(data.prices!.price!),
-                                  style: TextStyle(color: getTheme(context).onPrimary, fontWeight: FontWeight.bold, fontSize: xlfont),
-                                ),
-                                TextSpan(
-                                  text: ' ${data.prices!.currency!}',
-                                  style: TextStyle(color: getTheme(context).secondary, fontWeight: FontWeight.bold, fontSize: lfont),
+                                Icon(Icons.space_bar_outlined),
+                                Text(
+                                  '${data.squareMeter!} sq',
+                                  style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, fontSize: mfont),
                                 ),
                               ],
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  spacing: 5,
+                                  children: [
+                                    Icon(Icons.location_on_outlined),
+                                    Text(
+                                      data.location!.city!,
+                                      style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, fontSize: mfont),
+                                    ),
+                                  ],
+                                ),
+                                RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: formatNumberWithCommas(data.prices!.price!),
+                                        style: TextStyle(color: getTheme(context).onPrimary, fontWeight: FontWeight.bold, fontSize: xlfont),
+                                      ),
+                                      TextSpan(
+                                        text: ' ${data.prices!.currency!}',
+                                        style: TextStyle(color: getTheme(context).secondary, fontWeight: FontWeight.bold, fontSize: lfont),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ],
+                ),
+              ],
+            ),
+          ),
+          AnimatedPositioned(
+            top: bookmarkOffset,
+            right: bookmarkOffset,
+            duration: const Duration(milliseconds: 400),
+            child: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+
+                border: Border.all(color: getTheme(context).surface, width: 10.5),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(500),
+                child: BackgroundCaptureWidget(
+                  width: 40,
+                  height: 40,
+                  key: const ValueKey('savedBookmark'),
+                  initialPosition: Offset(0, 0),
+                  backgroundKey: backgroundKey,
+                  shader: liquidGlassLensShader,
+                  captureInterval: const Duration(milliseconds: 0),
+                  child: Image.asset(ImageConstants.saved, scale: 30, color: getTheme(context).onPrimary),
+                ),
               ),
             ),
           ),

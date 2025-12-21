@@ -25,30 +25,29 @@ void main() {
     // Create rounded box effect - size controlled by uEffectSize
     float effectRadius = uEffectSize * 0.5;
     float sizeMultiplier = 1.0 / (effectRadius * effectRadius);
-    float roundedBox = pow(abs(m2.x * uResolution.x / uResolution.y), 4.0) +
-                      pow(abs(m2.y), 4.0);
+    
+    // Wide rectangle shape - adjust these multipliers for different proportions
+    vec2 scaledM2 = m2 * vec2(0.1, 1.0); // Ratio: 0.2/0.5 = 0.4 (wider than tall)
+    float wideRoundedBox = pow(abs(scaledM2.x * uResolution.x / uResolution.y), 4.0) +
+                          pow(abs(scaledM2.y), 4.0);
 
-    // Calculate different zones of the effect
+    // Use wideRoundedBox for the liquid effect calculations
     float baseIntensity = 100.0 * sizeMultiplier;
-    float rb1 = clamp((1.0 - roundedBox * baseIntensity) * 8.0, 0.0, 1.0); // main lens
-    float rb2 = clamp((0.95 - roundedBox * baseIntensity * 0.95) * 16.0, 0.0, 1.0) -
-                clamp(pow(0.9 - roundedBox * baseIntensity * 0.95, 1.0) * 16.0, 0.0, 1.0); // borders
-    float rb3 = clamp((1.5 - roundedBox * baseIntensity * 1.1) * 2.0, 0.0, 1.0) -
-                clamp(pow(1.0 - roundedBox * baseIntensity * 1.1, 1.0) * 2.0, 0.0, 1.0); // shadow
-
+    float rb1 = clamp((1.0 - wideRoundedBox * baseIntensity) * 8.0, 0.0, 1.0); // main lens
+    
     fragColor = vec4(0.0);
 
-    if (rb1 + rb2 > 0.0) {
-        // Lens distortion effect
+    if (rb1 > 0.0) { 
+        // Lens distortion effect - use wideRoundedBox for distortion too
         float distortionStrength = 50.0 * sizeMultiplier;
-        vec2 lens = ((uv - 0.5) * (1.0 - roundedBox * distortionStrength) + 0.5);
+        vec2 lens = ((uv - 0.5) * (1.0 - wideRoundedBox * distortionStrength) + 0.5);
 
         // Enhanced chromatic dispersion calculation
         vec2 dir = normalize(m2);
         float dispersionScale = uDispersionStrength * 0.05;
 
-        // Create edge mask based on distance from center
-        float dispersionMask = smoothstep(0.3, 0.7, roundedBox * baseIntensity);
+        // Create edge mask based on distance from center - use wideRoundedBox
+        float dispersionMask = smoothstep(0.3, 0.7, wideRoundedBox * baseIntensity);
 
         // Apply mask to dispersion offsets
         vec2 redOffset = dir * dispersionScale * 2.0 * dispersionMask;
@@ -80,9 +79,8 @@ void main() {
             colorResult.a = 1.0;
         }
 
-        // Add lighting effects
-        float gradient = clamp((clamp(m2.y, 0.0, 0.2) + 0.1) / 2.0, 0.0, 1.0) +
-                        clamp((clamp(-m2.y, -1000.0, 0.2) * rb3 + 0.1) / 2.0, 0.0, 1.0);
+        // Add lighting effects - removed rb3 since we removed outer effects
+        float gradient = clamp((clamp(m2.y, 0.0, 0.2) + 0.1) / 2.0, 0.0, 1.0);
 
         // Combine all effects
         fragColor = mix(
@@ -90,7 +88,7 @@ void main() {
             colorResult,
             rb1
         );
-        fragColor = clamp(fragColor + vec4(rb2 * 0.3) + vec4(gradient * 0.2), 0.0, 1.0);
+        fragColor = clamp(fragColor + vec4(gradient * 0.2), 0.0, 1.0);
 
     } else {
         fragColor = texture(uTexture, uv);

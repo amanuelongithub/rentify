@@ -1,13 +1,13 @@
 import 'dart:math';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:liquid_glass_renderer/liquid_glass_renderer.dart';
-import 'package:rentify/service/liquid_effct/liquid_glass_lens_shader.dart';
+import 'package:rentify/service/liquid_glass_lens_shader.dart';
 import 'package:rentify/utils/globals.dart';
 import 'package:rentify/utils/image_constants.dart';
 import 'package:rentify/views/foryou_page.dart';
 import 'package:rentify/views/saved_page.dart';
 import 'package:rentify/views/widgets/dot_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:rentify/views/widgets/liquid_glass.dart';
 import 'package:rentify/views/widgets/main_appbar.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,7 +19,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
   final GlobalKey backgroundKey = GlobalKey();
-  late LiquidGlassLensShader liquidGlassLensShader = LiquidGlassLensShader()..initialize();
+  late LiquidGlassLensShader liquidGlassLensShader = LiquidGlassLensShader.rectangle()..initialize();
   late final TabController _tabController;
   int _currentIndex = 0;
 
@@ -50,7 +50,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   Widget build(BuildContext context) {
     return Scaffold(body: _buildStaticImageBackground());
   }
-
   Widget _buildStaticImageBackground() {
     return Stack(
       children: [
@@ -67,17 +66,18 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
           ),
         ),
         BackgroundCaptureWidget(
-          width: 160,
-          height: 160,
+          width: MediaQuery.sizeOf(context).width * 0.9,
+          height: 80,
           initialPosition: Offset(0, 0),
           backgroundKey: backgroundKey,
           shader: liquidGlassLensShader,
-          child: Center(child: Image.asset('assets/images/photo.png', width: 72, height: 72)),
+          child: Center(),
         ),
       ],
     );
   }
 */
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -164,58 +164,40 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
               ],
             ),
           ),
-          // Positioned(
-          //   bottom: 0,
-          //   left: 0,
-          //   right: 0,
-          //   child: BackgroundCaptureWidget(
-          //     width: double.infinity,
-          //     height: 70,
-          //     initialPosition: Offset(0, 0),
-          //     backgroundKey: backgroundKey,
-          //     shader: liquidGlassLensShader,
-          //     child: Container(
-          //       // decoration: BoxDecoration(borderRadius: BorderRadius.circular(kRadius), gradient: gradient(context)),
-          //       // child: Center(child: Text("hello")),
-          //       child: TabBar(
-          //         controller: _tabController,
-          //         indicatorColor: getTheme(context).secondary,
-          //         labelColor: getTheme(context).secondary,
-          //         dividerColor: getTheme(context).surface,
-          //         indicator: DotIndicator(color: getTheme(context).secondary, radius: 3),
-          //         tabs: [
-          //           _buildTabItem('Home', ImageConstants.home, Icons.home, Icons.home_outlined, 0),
-          //           _buildTabItem('Saved', ImageConstants.saved, Icons.bookmark_rounded, Icons.bookmark_outline_outlined, 1),
-          //           _buildTabItem('Reels', ImageConstants.reels, Icons.play_arrow, Icons.play_arrow_outlined, 2),
-          //           _buildTabItem('Setting', ImageConstants.notification, Icons.settings, Icons.settings, 3),
-          //         ],
-          //       ),
-          //     ),
-          //   ),
-          // ),
-        ],
-      ),
-      bottomNavigationBar: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-        height: 75,
-        child: LiquidGlassLayer(
-          child: LiquidGlass(
-            shape: LiquidRoundedSuperellipse(borderRadius: 30),
-            child: TabBar(
-              controller: _tabController,
-              indicatorColor: getTheme(context).secondary,
-              labelColor: getTheme(context).secondary,
-              dividerColor: getTheme(context).surface,
-              indicator: DotIndicator(color: getTheme(context).secondary, radius: 3),
-              tabs: [
-                _buildTabItem('Home', ImageConstants.home, Icons.home, Icons.home_outlined, 0),
-                _buildTabItem('Saved', ImageConstants.saved, Icons.bookmark_rounded, Icons.bookmark_outline_outlined, 1),
-                _buildTabItem('Reels', ImageConstants.reels, Icons.play_arrow, Icons.play_arrow_outlined, 2),
-                _buildTabItem('Setting', ImageConstants.notification, Icons.settings, Icons.settings, 3),
-              ],
+          Positioned(
+            bottom: 15,
+            left: 20,
+            right: 20,
+            child: ClipRRect(
+              borderRadius: BorderRadiusGeometry.circular(kRadius + 5),
+              child: BackgroundCaptureWidget(
+                width: MediaQuery.sizeOf(context).width * 0.9,
+                height: 60,
+                initialPosition: Offset(0, 0),
+                backgroundKey: backgroundKey,
+                shader: liquidGlassLensShader,
+
+                child: Container(
+                  decoration: BoxDecoration(gradient: gradient(context)),
+
+                  child: TabBar(
+                    controller: _tabController,
+                    indicatorColor: getTheme(context).secondary,
+                    labelColor: getTheme(context).secondary,
+                    dividerColor: getTheme(context).surface,
+                    indicator: DotIndicator(color: getTheme(context).secondary, radius: 3),
+                    tabs: [
+                      _buildTabItem('Home', ImageConstants.home, Icons.home, Icons.home_outlined, 0),
+                      _buildTabItem('Saved', ImageConstants.saved, Icons.bookmark_rounded, Icons.bookmark_outline_outlined, 1),
+                      _buildTabItem('Reels', ImageConstants.reels, Icons.play_arrow, Icons.play_arrow_outlined, 2),
+                      _buildTabItem('Setting', ImageConstants.notification, Icons.settings, Icons.settings, 3),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

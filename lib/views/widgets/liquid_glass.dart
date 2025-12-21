@@ -3,8 +3,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:rentify/service/liquid_effct/base_shader.dart';
-import 'package:rentify/service/liquid_effct/shader_painter.dart';
+import 'package:rentify/service/liquid_glass_lens_shader.dart';
 
 class BackgroundCaptureWidget extends StatefulWidget {
   const BackgroundCaptureWidget({
@@ -76,6 +75,29 @@ class _BackgroundCaptureWidgetState extends State<BackgroundCaptureWidget> with 
     );
 
     return child;
+    // return Positioned(
+    //   left: position.dx,
+    //   top: position.dy,
+    //   child: Draggable(
+    //     feedback: SizedBox.square(),
+    //     childWhenDragging: child,
+    //     onDragUpdate: (details) {
+    //       setState(() {
+    //         position = position + details.delta;
+    //       });
+
+    //       if (!isCapturing) {
+    //         _captureBackground();
+    //       }
+    //     },
+    //     onDragEnd: (details) {
+    //       WidgetsBinding.instance.addPostFrameCallback((_) {
+    //         _captureBackground();
+    //       });
+    //     },
+    //     child: child,
+    //   ),
+    // );
   }
 
   Widget _buildWidgetContent() {

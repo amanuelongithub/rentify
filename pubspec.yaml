@@ -37,7 +37,8 @@ flutter:
     - assets/fonts/
 
   shaders:
-    - shaders/liquid_glass_lens.frag
+    - shaders/liquid_glass_lens_circle.frag
+    - shaders/liquid_glass_lens_rectangle.frag
 
   fonts:
     - family: Inter
