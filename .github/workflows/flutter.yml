@@ -16,18 +16,37 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.38.0'
+          cache: true
+          cache-key: flutter-${{ runner.os }}-${{ hashFiles('pubspec.lock') }}
+          cache-path: ${{ runner.temp }}/flutter_sdk
+
+      - name: Cache Pub dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ${{ runner.temp }}/pub_cache
+            .dart_tool
+          key: pub-${{ runner.os }}-${{ hashFiles('pubspec.lock') }}
+          restore-keys: |
+            pub-${{ runner.os }}-
 
       - name: Install dependencies
-        run: flutter pub get
+        run: |
+          export PUB_CACHE="${{ runner.temp }}/pub_cache"
+          flutter pub get
 
-      - name: Skip tests
-        run: echo "Tests skipped"
+      - name: Verify Flutter installation
+        run: flutter --version
+
+      - name: Run tests
+        run: flutter test
 
       - name: Build APK
-        run: flutter build apk --release   
+        run: flutter build apk --release
       
-      - name: Upload APK
-        uses: actions/upload-artifact@v3
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
         with:        
           name: app-release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
+          retention-days: 7
