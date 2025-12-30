@@ -1,4 +1,4 @@
-name: yegnabet
+name: rentify
 description: "A new Flutter project."
 publish_to: "none"
 
@@ -35,6 +35,11 @@ flutter:
     - assets/videos/
     - assets/files/
     - assets/fonts/
+
+  shaders:
+    - shaders/liquid_glass_lens_circle.frag
+    - shaders/liquid_glass_lens_rectangle.frag
+
   fonts:
     - family: Inter
       fonts:

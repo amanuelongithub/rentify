@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yegnabet/utils/globals.dart';
+import 'package:rentify/utils/globals.dart';
 
 class CustomDivider extends StatelessWidget {
   const CustomDivider({super.key});

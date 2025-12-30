@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:yegnabet/views/details_page.dart';
-import 'package:yegnabet/views/filter_page.dart';
-import 'package:yegnabet/views/home_page.dart';
+import 'package:rentify/views/details_page.dart';
+import 'package:rentify/views/filter_page.dart';
+import 'package:rentify/views/home_page.dart';
 
 class Routes {
   static final routes = [

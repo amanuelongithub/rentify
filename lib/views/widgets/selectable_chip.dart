@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yegnabet/utils/theme_data.dart';
+import 'package:rentify/utils/theme_data.dart';
 
 Widget selectableChip({required String label, required IconData icon, required bool isSelected}) {
   return ClipRRect(

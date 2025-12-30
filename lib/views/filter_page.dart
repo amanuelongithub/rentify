@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:yegnabet/service/haptic.dart';
-import 'package:yegnabet/utils/globals.dart';
-import 'package:yegnabet/utils/theme_data.dart';
-import 'package:yegnabet/views/widgets/selectable_chip.dart';
+import 'package:rentify/service/haptic.dart';
+import 'package:rentify/utils/globals.dart';
+import 'package:rentify/utils/theme_data.dart';
+import 'package:rentify/views/widgets/selectable_chip.dart';
 
 class FilterPage extends StatefulWidget {
   const FilterPage({super.key});
@@ -96,7 +96,7 @@ class _FilterPageState extends State<FilterPage> {
                     labelStyle: TextStyle(color: isSelected ? AppTheme.textColor : AppTheme.textColor.withValues(alpha: 0.7)),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
-                      side: BorderSide(color: isSelected ? AppTheme.primaryColor : Colors.transparent, width: 1.5),
+                      side: BorderSide(color: isSelected ? getTheme(context).primary : Colors.transparent, width: 1.5),
                     ),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     visualDensity: VisualDensity.compact,
@@ -126,18 +126,18 @@ class _FilterPageState extends State<FilterPage> {
                       style: TextStyle(fontSize: 13, fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal),
                     ),
                     selected: isSelected,
-                    selectedColor: AppTheme.primaryColor.withValues(alpha: 0.3),
+
+                    selectedColor: getTheme(context).primary.withValues(alpha: 0.3),
                     backgroundColor: getTheme(context).surface.withValues(alpha: 0.6),
                     labelStyle: TextStyle(color: isSelected ? AppTheme.textColor : AppTheme.textColor.withValues(alpha: 0.7)),
-                    avatar: option != 'Any' && option != '5+'
-                        ? Icon(Icons.bed, size: 16, color: isSelected ? AppTheme.textColor : AppTheme.textColor.withValues(alpha: 0.7))
-                        : null,
+                    avatar: option != 'Any' && option != '5+' ? Icon(Icons.bed, size: 16, color: getTheme(context).secondary) : null,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
-                      side: BorderSide(color: isSelected ? AppTheme.primaryColor : Colors.transparent, width: 1.5),
+                      side: BorderSide(color: isSelected ? getTheme(context).primary : Colors.transparent, width: 1.5),
                     ),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     visualDensity: VisualDensity.compact,
+
                     onSelected: (selected) {
                       setState(() {
                         _selectedBedrooms = selected ? index : 0;
@@ -157,7 +157,7 @@ class _FilterPageState extends State<FilterPage> {
                 max: 300000,
                 divisions: 60,
                 labels: null,
-                activeColor: AppTheme.primaryColor,
+                activeColor: getTheme(context).primary,
                 inactiveColor: AppTheme.secondaryColor.withValues(alpha: 0.3),
                 onChanged: (values) {
                   Haptic.tick();
@@ -286,7 +286,7 @@ class _FilterPageState extends State<FilterPage> {
                 Navigator.pop(context, filters);
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppTheme.primaryColor,
+                backgroundColor: getTheme(context).primary,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               ),
               child: Row(
@@ -352,7 +352,7 @@ class _FilterPageState extends State<FilterPage> {
                   trackOutlineColor: WidgetStateProperty.resolveWith(
                     (states) => states.contains(WidgetState.selected) ? null : AppTheme.backgroundColor.withValues(alpha: 0.5),
                   ),
-                  activeTrackColor: AppTheme.primaryColor.withValues(alpha: 0.3),
+                  activeTrackColor: getTheme(context).primary.withValues(alpha: 0.3),
                 ),
               ),
             ],

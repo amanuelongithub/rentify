@@ -1,12 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
-import 'package:yegnabet/controller/home_controller.dart';
-import 'package:yegnabet/utils/globals.dart';
-import 'package:yegnabet/views/widgets/custom_divider.dart';
-import 'package:yegnabet/views/widgets/selectable_chip.dart';
-import 'package:yegnabet/views/widgets/text_minimizer.dart';
-// import 'package:yegnabet/views/widgets/custom_divider.dart';
+import 'package:rentify/controller/home_controller.dart';
+import 'package:rentify/utils/globals.dart';
+import 'package:rentify/views/widgets/custom_divider.dart';
+import 'package:rentify/views/widgets/selectable_chip.dart';
+import 'package:rentify/views/widgets/text_minimizer.dart';
+// import 'package:rentify/views/widgets/custom_divider.dart';
 
 class DetailsPage extends StatelessWidget {
   const DetailsPage({super.key});
@@ -304,32 +304,24 @@ class DetailsPage extends StatelessWidget {
                                 children: [
                                   Row(
                                     children: [
-                                      // Icon(Icons.location_on, size: 18),
-                                      // SizedBox(width: 8),
                                       Text("Address: "),
                                       Expanded(child: Text(location!)),
                                     ],
                                   ),
                                   Row(
                                     children: [
-                                      // // Icon(Icons.location_city, size: 18),
-                                      // // SizedBox(width: 8),
                                       Text("City: "),
                                       Expanded(child: Text("$city")),
                                     ],
                                   ),
                                   Row(
                                     children: [
-                                      // // Icon(Icons.map, size: 18),
-                                      // // SizedBox(width: 8),
                                       Text("Area: "),
                                       Expanded(child: Text("$area")),
                                     ],
                                   ),
                                   Row(
                                     children: [
-                                      // // Icon(Icons.public, size: 18),
-                                      // // SizedBox(width: 8),
                                       Text("Country: "),
                                       Expanded(child: Text("$country")),
                                     ],
